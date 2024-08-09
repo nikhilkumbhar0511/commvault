@@ -1,0 +1,46 @@
+Problem Statement
+You are given a string composed only of the characters 'D' and 'C'. 
+Your task is to rearrange this string such that no two adjacent characters are the same (i.e., no two 'D's and no two 'C's are next to each other). 
+If it is not possible to rearrange the string to meet this condition, return -1.
+If rearrangement is possible, determine the minimum number of adjacent swaps required to achieve this valid arrangement.
+
+Solution for it in python
+
+def swap(s):
+    d=0
+    c=0
+    for i in s:
+        if i=='D':
+            d+=1
+        else:
+            c+=1
+    if abs(d-c)>1:
+        return -1
+    result=""
+    while d> 0 or c> 0:
+        if d>c:
+            result+='D'
+            d-=1
+            if c>0:
+                result+='C'
+                c-=1
+        else:
+            result+='C'
+            c-=1
+            if d>0:
+                result+='D'
+                d-=1
+#   return result
+    cou=0
+    k=0
+    j=0
+    while k<len(s) and j<len(result):
+        if(s[k]==result[j]):
+            k+=1
+            j+=1
+        else:
+            cou+=1
+            k+=2
+            j+=2         
+    return cou           
+print(swap("DCDDCDC"))
